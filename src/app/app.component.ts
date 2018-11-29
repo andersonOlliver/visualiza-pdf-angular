@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as printJS from 'print-js';
 
@@ -19,5 +19,15 @@ export class AppComponent {
   imprimir() {
     // @ts-ignore
     printJS(this.url);
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  onKeyDownEvent(event: KeyboardEvent) {
+    console.log(event);
+
+    if (event.key.toLowerCase() === 'p' && event.ctrlKey) {
+      event.preventDefault();
+      this.imprimir();
+    }
   }
 }
