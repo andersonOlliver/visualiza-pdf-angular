@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import * as printJS from 'print-js';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Exibindo PDF por URL';
+  title = 'Exibindo PDF no Angular';
   url = '/assets/demo.pdf';
   safeUrl: any;
 
@@ -15,5 +16,8 @@ export class AppComponent {
     this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
   }
 
-
+  imprimir() {
+    // @ts-ignore
+    printJS(this.url);
+  }
 }
